@@ -464,13 +464,13 @@ function getValidRoutes({
   }
 
   if (_useACF) {
-    // The OPTIONS ACF API Route is not giving a valid _link so let`s add it manually.
+    // The OPTIONS ACF API Route is not giving a valid _link so let`s add it manually for each specified options page id.
     _acfOptionPageIds.forEach(function(acfOptionPageId) {
       validRoutes.push({
         url: `${url}/acf/v3/options/${acfOptionPageId}`,
         type: `${typePrefix}acf_options`,
       })
-    });
+    })
     if (_verbose)
       console.log(
         colorized.out(`Added ACF Options route.`, colorized.color.Font.FgGreen)

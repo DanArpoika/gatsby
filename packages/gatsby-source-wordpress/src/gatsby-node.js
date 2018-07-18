@@ -13,7 +13,6 @@ const refactoredEntityTypes = {
 let _verbose
 let _siteURL
 let _useACF = true
-let _acfVersion
 let _acfOptionPageIds
 let _hostingWPCOM
 let _auth
