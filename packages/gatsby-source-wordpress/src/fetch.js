@@ -15,6 +15,7 @@ async function fetch({
   _verbose,
   _siteURL,
   _useACF,
+  _acfOptionPageIds,
   _hostingWPCOM,
   _auth,
   _perPage,
@@ -105,6 +106,7 @@ async function fetch({
       baseUrl,
       _verbose,
       _useACF,
+      _acfOptionPageIds,
       _hostingWPCOM,
       _excludedRoutes,
       typePrefix,
@@ -369,6 +371,7 @@ function getValidRoutes({
   baseUrl,
   _verbose,
   _useACF,
+  _acfOptionPageIds,
   _hostingWPCOM,
   _excludedRoutes,
   typePrefix,
@@ -462,10 +465,12 @@ function getValidRoutes({
 
   if (_useACF) {
     // The OPTIONS ACF API Route is not giving a valid _link so let`s add it manually.
-    validRoutes.push({
-      url: `${url}/acf/v2/options`,
-      type: `${typePrefix}acf_options`,
-    })
+    _acfOptionPageIds.forEach(function(acfOptionPageId) {
+      validRoutes.push({
+        url: `${url}/acf/v3/options/${acfOptionPageId}`,
+        type: `${typePrefix}acf_options`,
+      })
+    });
     if (_verbose)
       console.log(
         colorized.out(`Added ACF Options route.`, colorized.color.Font.FgGreen)
